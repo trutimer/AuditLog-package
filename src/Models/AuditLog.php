@@ -21,6 +21,10 @@ class AuditLog extends Model
         return $log;
     }
 
+    public static function getAuditLogs(){
+        return AuditLog::query()->latest()->limit(50)->get();
+    }
+
     protected $fillable = [
         'event_status',
         'event_type',

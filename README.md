@@ -33,6 +33,7 @@ Update your packages with ```composer update``` or install with ```composer inst
 
 ## Migration
 You need to run migration in order to prepare the table(s) needed for the logs. Run a migration:
+
 ``$ php artisan migrate``
 
 ## Configuration
@@ -48,6 +49,24 @@ return [
     'send_email_to'   => '',
 ];
 ```
+AuditLog Service Provider is automatically added in `config/app.php`, in case it does not, you must register the provider when bootstrapping your Laravel application.
+
+Find the `providers` key in `config/app.php` and register the Captcha Service Provider.
+
+```php
+    'providers' => [
+        // ...
+        'Eddytim\Auditlog\AuditLogServiceProvider',
+    ]
+```
+for Laravel 5.1+
+```php
+    'providers' => [
+        // ...
+        \Eddytim\Auditlog\AuditLogServiceProvider::class,
+    ]
+```
+
 ## Example Usage
 ### Default without alert on the log
 ```php

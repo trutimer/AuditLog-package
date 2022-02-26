@@ -12,7 +12,10 @@ class AuditLogServiceProvider extends ServiceProvider {
         $this->loadViewsFrom(__DIR__.'/views', 'audit');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->mergeConfigFrom(__DIR__.'/config/audit.php', 'audit');
-        $this->publishes([__DIR__.'/config/audit.php' => config_path('audit.php')]);
+        $this->publishes([
+            __DIR__.'/config/audit.php' => config_path('audit.php'),
+//            __DIR__.'/views' => resource_path('views/vendor/audit')
+        ]);
     }
 
     public function register(){}

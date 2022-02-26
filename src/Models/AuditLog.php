@@ -12,19 +12,13 @@ class AuditLog extends Model
 {
     use HasFactory;
 
-    public static function store(array $attributes = array(), $send_alert = false, $message = null): JsonResponse
+    public static function store(array $attributes = array(), $message = null): JsonResponse
     {
-        try {
-            throw_if($send_alert && $message == null);
-
-            $log = AuditLog::create($attributes);
-            if ($send_alert){
-                Mail::to(config('audit.send_email_to'))->send(new AlertOtherUsersMail($message));
-            }
-            return response()->json(['status' => 'success','data' => $log]);
-        } catch (\Throwable $e) {
-            return response()->json(['status' => 'error', 'message' => 'Message field is required if you want to send alert'], 401);
+        $log = AuditLog::create($attributes);
+        if ($message != null){
+            Mail::to(config('audit.send_email_to'))->send(new AlertOtherUsersMail($message));
         }
+        return $log;
     }
 
     protected $fillable = [

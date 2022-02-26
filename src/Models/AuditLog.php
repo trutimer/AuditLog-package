@@ -12,7 +12,7 @@ class AuditLog extends Model
 {
     use HasFactory;
 
-    public static function store(array $attributes = array(), $message = null): JsonResponse
+    public static function store(array $attributes = array(), $message = null)
     {
         $log = AuditLog::create($attributes);
         if ($message != null){

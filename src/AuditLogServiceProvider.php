@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AuditLogServiceProvider extends ServiceProvider {
 
-//    php artisan vendor:publish --provider="Eddytim\Auditlog\AuditLogServiceProvider"
     public function boot(){
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/views', 'audit');

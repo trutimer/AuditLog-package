@@ -31,11 +31,15 @@ composer require eddytim/auditlog
 
 Update your packages with ```composer update``` or install with ```composer install```.
 
+## Migration
+You need to run migration in order to prepare the table(s) needed for the logs. Run a migration:
+``$ php artisan migrate``
+
 ## Configuration
 
 To insert an email address to send alert, publish config.
 
-```$ php artisan vendor:publish```
+```$ php artisan vendor:publish --provider="Eddytim\Auditlog\AuditLogServiceProvider"```
 
 `config/audit.php`
 

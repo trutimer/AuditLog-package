@@ -1,0 +1,19 @@
+{
+    "name": "eddytim/auditlog",
+    "description": "Library for inserting and fetching audit logs easily and sending alert to user",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Eddytim\\Auditlog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "eddytim",
+            "email": "ahmedtheidealman@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

@@ -51,7 +51,7 @@ return [
 ```
 AuditLog Service Provider is automatically added in `config/app.php`, in case it does not, you must register the provider when bootstrapping your Laravel application.
 
-Find the `providers` key in `config/app.php` and register the Captcha Service Provider.
+Find the `providers` key in `config/app.php` and register the AuditLog Service Provider.
 
 ```php
     'providers' => [

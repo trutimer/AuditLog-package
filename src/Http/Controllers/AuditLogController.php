@@ -17,4 +17,8 @@ class AuditLogController extends Controller {
             'row_id' => null
         ]);
     }
+
+    public function fetchLogs(){
+        return AuditLog::getAuditLogs(0);
+    }
 }

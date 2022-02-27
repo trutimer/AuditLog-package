@@ -2,11 +2,9 @@
 
 namespace Eddytim\Auditlog\Models;
 
-use Eddytim\Auditlog\Mail\AlertOtherUsersMail;
+use Eddytim\Auditlog\Jobs\SendAlertMailJob;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Mail;
 
 class AuditLog extends Model
 {
@@ -16,13 +14,17 @@ class AuditLog extends Model
     {
         $log = AuditLog::create($attributes);
         if ($message != null){
-            Mail::to(config('audit.send_email_to'))->send(new AlertOtherUsersMail($message));
+            SendAlertMailJob::dispatch($message);
         }
         return $log;
     }
 
-    public static function getAuditLogs(){
-        return AuditLog::query()->latest()->limit(50)->get();
+    public static function getAuditLogs($offset){
+        return AuditLog::query()->latest()->skip($offset)->take(config('audit.audit_logs_limit'))->get();
+    }
+
+    public function user(){
+        return $this->belongsTo(config('audit.user_model'), config('audit.foreign_key'), config('audit.owner_key'));
     }
 
     protected $fillable = [

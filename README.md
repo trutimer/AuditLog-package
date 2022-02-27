@@ -38,7 +38,7 @@ You need to run migration in order to prepare the table(s) needed for the logs. 
 
 ## Configuration
 
-To insert an email address to send alert, publish config.
+To insert an email address to send alert, publish config. You will also be able to configure the user model of which audit log belongs to, setting foreign and owner key. You will also be able to set audit log fetch limit of which by default is `50`
 
 ```$ php artisan vendor:publish --provider="Eddytim\Auditlog\AuditLogServiceProvider"```
 
@@ -47,6 +47,10 @@ To insert an email address to send alert, publish config.
 ```php
 return [
     'send_email_to'   => '',
+    'user_model' => App\Models\User::class,
+    'foreign_key' => 'user_id',
+    'owner_key' => 'id',
+    'audit_logs_limit' => 50,
 ];
 ```
 AuditLog Service Provider is automatically added in `config/app.php`, in case it does not, you must register the provider when bootstrapping your Laravel application.
@@ -91,4 +95,14 @@ for Laravel 5.1+
             'table_name' => null, // insert a table name if you will want to track affected table
             'row_id' => null // insert table row id if you will want to track specific affected record
         ], 'This is a message to alert you on the changes');
+```
+
+###Fetching the Logs
+```php
+
+//    Parameter required is an integer which indicates the offset when fetching the logs
+    /**
+     * @param $offset
+     */
+    $logs = AuditLog::getAuditLogs(0);
 ```
